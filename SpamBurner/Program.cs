@@ -26,10 +26,41 @@ static async Task Run(ILogger<Program> logger, IOptions<ConsoleOptions> options,
 {
     var (mastodonUrl, mastodonToken) = options.Value;
     var client = new MastodonClient(mastodonUrl, mastodonToken, factory.CreateClient());
-    var hoge = await client.GetAdminAccounts(new() { Limit = 50 }, AdminAccountOrigin.Remote, AdminAccountStatus.Active);
-    foreach (var account in hoge.Where(a => a.Account?.FollowersCount == 0))
+    string? maxId = null;
+    HashSet<string> ignoreDomains = ["misskey.io", "pawoo.net", "mstdn.jp"];
+    var domains = new Dictionary<string, int>();
+    var count = 0;
+    while (count < 5)
     {
-        logger.LogInformation($"{account.Id} {account.Email} {account.Ip} {string.Join(", ", account.Ips.Select(i => i.Ip))}");
+        var accounts = await client.GetAdminAccounts(new() { MaxId = maxId, Limit = 10000 }, AdminAccountOrigin.Remote, AdminAccountStatus.Active);
+        maxId = accounts.Last().Id;
+        var targets = accounts.Where(a => a.Account?.FollowersCount == 0 && a.Account?.FollowingCount == 0)
+            .Where(a => a.Account?.StatusesCount > 0)
+            .Where(a => a.Account?.AvatarUrl.EndsWith("missing.png") ?? false)
+            .Where(a => a.UserName.Length == 10)
+            .Where(a => !ignoreDomains.Contains(a.Domain!))
+            .ToArray();
+        if (targets.Length == 0)
+        {
+            count++;
+            continue;
+        }
+        count = 0;
+        foreach (var account in targets)
+        {
+            if (!domains.TryAdd(account.Domain!, 1))
+            {
+                domains[account.Domain!]++;
+            }
+            await client.PerformAccount(account.Id, AdminActionType.Suspend);
+            await client.DeleteAccount(account.Id);
+            logger.LogInformation($"{account.Id} {account.Account?.AccountName}");
+        }
+        // return;
+    }
+    foreach (var (domain, v) in domains.OrderByDescending(kv => kv.Value).Where(kv => kv.Value > 1))
+    {
+        logger.LogInformation($"{domain}: {v}");
     }
 }
 
