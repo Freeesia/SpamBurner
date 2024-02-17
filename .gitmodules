@@ -1,0 +1,4 @@
+[submodule "Mastonet"]
+	path = Mastonet
+	url = https://github.com/Freeesia/Mastonet.git
+	branch = feature/fix_deserialize
