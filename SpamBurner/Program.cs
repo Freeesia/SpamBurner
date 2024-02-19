@@ -34,7 +34,7 @@ static async Task Run(ILogger<Program> logger, IOptions<ConsoleOptions> options,
     {
         var accounts = await client.GetAdminAccounts(new() { MaxId = maxId, Limit = 10000 }, AdminAccountOrigin.Remote, AdminAccountStatus.Active);
         maxId = accounts.Last().Id;
-        var targets = accounts.Where(a => a.Account?.FollowersCount == 0 && a.Account?.FollowingCount == 0)
+        var targets = accounts.Where(a => a.Account?.FollowersCount <= 1 && a.Account?.FollowingCount == 0)
             .Where(a => a.Account?.StatusesCount > 0)
             .Where(a => a.Account?.AvatarUrl.EndsWith("missing.png") ?? false)
             .Where(a => a.UserName.Length == 10)
