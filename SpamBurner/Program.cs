@@ -60,7 +60,16 @@ static async Task Run(ILogger<Program> logger, IOptions<ConsoleOptions> options,
     }
     foreach (var (domain, v) in domains.OrderByDescending(kv => kv.Value).Where(kv => kv.Value > 1))
     {
-        logger.LogInformation($"{domain}: {v}");
+        var users = await client.GetAdminAccounts(new(), AdminAccountOrigin.Remote, AdminAccountStatus.Active, byDomain: domain);
+        if (users.Count == 0)
+        {
+            await client.AdminBlockDomain(domain, AdminBlockDomainAction.Suspend, privateComment: "スパム鯖");
+            logger.LogInformation($"block {domain}: spam {v}");
+        }
+        else
+        {
+            logger.LogInformation($"skip {domain}: spam {v}, users {users.Count}");
+        }
     }
 }
 
