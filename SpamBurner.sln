@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpamBurner", "SpamBurner\SpamBurner.csproj", "{1433BB37-6A11-46D3-AB51-035C84942DBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mastonet", "Mastonet", "{F1A1B373-10E6-420B-A1BF-6CE4DC0934DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastonet", "Mastonet\Mastonet\Mastonet.csproj", "{5744BB7B-B765-4BE8-85A4-B163F87B677D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastonet.Entities", "Mastonet\Mastonet.Entities\Mastonet.Entities.csproj", "{5BBAA792-EC25-40FC-B94A-D90CEF0B4CFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1433BB37-6A11-46D3-AB51-035C84942DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1433BB37-6A11-46D3-AB51-035C84942DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1433BB37-6A11-46D3-AB51-035C84942DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1433BB37-6A11-46D3-AB51-035C84942DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5744BB7B-B765-4BE8-85A4-B163F87B677D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5744BB7B-B765-4BE8-85A4-B163F87B677D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5744BB7B-B765-4BE8-85A4-B163F87B677D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5744BB7B-B765-4BE8-85A4-B163F87B677D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BBAA792-EC25-40FC-B94A-D90CEF0B4CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BBAA792-EC25-40FC-B94A-D90CEF0B4CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BBAA792-EC25-40FC-B94A-D90CEF0B4CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BBAA792-EC25-40FC-B94A-D90CEF0B4CFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5744BB7B-B765-4BE8-85A4-B163F87B677D} = {F1A1B373-10E6-420B-A1BF-6CE4DC0934DD}
+		{5BBAA792-EC25-40FC-B94A-D90CEF0B4CFE} = {F1A1B373-10E6-420B-A1BF-6CE4DC0934DD}
+	EndGlobalSection
+EndGlobal
